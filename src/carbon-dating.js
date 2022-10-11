@@ -20,20 +20,22 @@ const HALF_LIFE_PERIOD = 5730;
 function dateSample(sampleActivity) {
   // throw new NotImplementedError('Not implemented');
   // remove line with error and write your code here
+
   let value = undefined;
+    
   if(typeof sampleActivity === 'string'){
-    let value = parseFloat(sampleActivity);
+    value = parseFloat(sampleActivity);
   }else{
     return false;
   }  
-  if(!value || value < 0 || value > 9999){
+  if(!value || value <= 0 || value >= 15){
+    // 
     return false;
   }
   let k = Math.LN2/HALF_LIFE_PERIOD;
-  let kt = Math.log2(MODERN_ACTIVITY/sampleActivity);
-  let age = Math.ceil((kt/k));
-  return age;
-
+  let kt = Math.log((MODERN_ACTIVITY/value));
+  let age = (kt/k);    
+  return Math.ceil(age); 
 }
 
 module.exports = {
